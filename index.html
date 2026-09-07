@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel Ebinum | Video Editor & Writer</title>
+    <meta name="description"
+        content="Portfolio of Emmanuel Ebinum, crypto writer, video editor, and creator. Explore video editing show reels alongside threads on stablecoins, DeFi, and AI networks.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        /* =========================================
+           DESIGN TOKENS
+        ========================================= */
+        :root {
+            --bg: #ffffff;
+            --bg-card: #f4f4f4;
+            --bg-glass: rgba(0, 0, 0, 0.03);
+            --border: rgba(0, 0, 0, 0.09);
+            --border-hover: rgba(0, 0, 0, 0.35);
+            --text: #111111;
+            --text-muted: #555555;
+            --text-dim: #999999;
+            --accent: #111111;
+            --accent2: #555555;
+            --glow: rgba(0, 0, 0, 0.06);
+            --glow2: rgba(0, 0, 0, 0.04);
+            --font-display: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --radius-card: 18px;
+            --radius-btn: 100px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* =========================================
+           RESET & BASE
+        ========================================= */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+
+        /* Ambient gradient blobs */
+        body::before {
+            content: "";
+            position: fixed;
+            top: -200px;
+            left: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            bottom: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.02) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* =========================================
+           LAYOUT
+        ========================================= */
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+        .hero {
+            padding: 6rem 0 5rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem;
+            border-radius: var(--radius-btn);
+            border: 1px solid var(--border);
+            background: var(--bg-glass);
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .hero-badge::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 6vw, 4.2rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, #111111 30%, #666666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.6rem;
+            border-radius: var(--radius-btn);
+            background: var(--accent);
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all var(--transition);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+        }
+
+        .btn-primary:hover {
+            background: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.6rem;
+            border-radius: var(--radius-btn);
+            border: 1px solid var(--border);
+            background: var(--bg-glass);
+            color: var(--text);
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all var(--transition);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--border-hover);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================
+           DIVIDER / STATS BAR
+        ========================================= */
+        .stats-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.04em;
+        }
+
+        .stat-number span {
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-top: 0.2rem;
+        }
+
+        /* =========================================
+           SECTION HEADINGS
+        ========================================= */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: var(--radius-btn);
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text);
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+        }
+
+        /* =========================================
+           WRITING SECTION
+        ========================================= */
+        #writing {
+            margin-bottom: 6rem;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .section-header--toggle {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-chevron {
+            flex-shrink: 0;
+            color: var(--text-muted);
+            transition: transform var(--transition), color var(--transition);
+        }
+
+        .section-header--toggle:hover .section-chevron {
+            color: var(--text);
+        }
+
+        .section-header--toggle.open .section-chevron {
+            transform: rotate(180deg);
+        }
+
+        .articles-collapse {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transition: grid-template-rows 0.45s ease, opacity 0.35s ease;
+        }
+
+        .articles-collapse>.articles-grid {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .articles-collapse.open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+
+        .article-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            padding: 1.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+            overflow: hidden;
+        }
+
+        .article-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at top left, var(--glow), transparent 60%);
+            opacity: 0;
+            transition: opacity var(--transition);
+            pointer-events: none;
+        }
+
+        .article-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 32px var(--glow);
+        }
+
+        .article-card:hover::before {
+            opacity: 1;
+        }
+
+        .article-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 100px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+
+        .article-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.35;
+            color: var(--text);
+        }
+
+        .article-summary {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            flex: 1;
+        }
+
+        .read-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            transition: gap var(--transition), opacity var(--transition);
+            margin-top: 0.25rem;
+        }
+
+        .read-btn:hover {
+            gap: 0.7rem;
+            opacity: 0.8;
+        }
+
+        .read-btn svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        /* =========================================
+           VIDEO SECTION
+        ========================================= */
+        #video-editing {
+            margin-bottom: 6rem;
+        }
+
+        .video-filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: var(--bg-glass);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-btn);
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            transition: color var(--transition), border-color var(--transition), background var(--transition);
+        }
+
+        .filter-btn:hover {
+            color: var(--text);
+            border-color: var(--border-hover);
+        }
+
+        .filter-btn.active {
+            color: #fff;
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .video-card.hidden {
+            display: none;
+        }
+
+        .video-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+
+        .video-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at top right, var(--glow2), transparent 60%);
+            opacity: 0;
+            transition: opacity var(--transition);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .video-card:hover {
+            border-color: rgba(167, 139, 250, 0.45);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 32px var(--glow2);
+        }
+
+        .video-card:hover::before {
+            opacity: 1;
+        }
+
+        .video-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.32s cubic-bezier(0.34, 1.2, 0.4, 1), box-shadow 0.32s ease;
+        }
+
+        .video-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+        }
+
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.15);
+            transition: background var(--transition);
+        }
+
+        .play-overlay svg {
+            width: 52px;
+            height: 52px;
+            padding: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.92);
+            color: var(--text);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            transform: scale(1);
+            transition: transform var(--transition);
+        }
+
+        .video-card:hover .play-overlay {
+            background: rgba(0, 0, 0, 0.35);
+        }
+
+        .video-card:hover .play-overlay svg {
+            transform: scale(1.08);
+        }
+
+        /* =========================================
+           EXPANDABLE VIDEO CARD
+        ========================================= */
+        .video-card {
+            transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition), grid-column var(--transition);
+        }
+
+        .video-card.expanded {
+            z-index: 50;
+            overflow: visible;
+        }
+
+        .video-card.expanded .video-wrap {
+            position: absolute;
+            top: -14px;
+            left: -14px;
+            right: -14px;
+            width: calc(100% + 28px);
+            height: 320px;
+            aspect-ratio: auto;
+            border-radius: var(--radius-card);
+            cursor: default;
+            transform: scale(1.03);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-hover);
+        }
+
+        .video-card.expanded .video-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+            pointer-events: auto;
+        }
+
+        .video-card.expanded .video-info {
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            pointer-events: none;
+        }
+
+        .video-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.55);
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+            transition: background var(--transition), transform var(--transition);
+        }
+
+        .video-close:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: rotate(90deg);
+        }
+
+        .video-card.expanded .video-close {
+            display: flex;
+        }
+
+        .video-card.expanded .play-overlay {
+            display: none;
+        }
+
+        .video-info {
+            padding: 1.25rem 1.5rem 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .video-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 100px;
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--accent2);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .video-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--text);
+        }
+
+        .video-summary {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================================
+           SCROLL ANIMATIONS
+        ========================================= */
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        [data-reveal].revealed {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+
+            .stats-bar {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 4rem 0 3.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="container">
+            <div class="nav-inner">
+                <a href="#" class="nav-logo">Emmanuel<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="#video-editing">Video</a></li>
+                    <li><a href="#writing">Writing</a></li>
+                    <li><a href="https://x.com/binum_dev" target="_blank" rel="noopener">X (Twitter)</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="container">
+        <section class="hero">
+            <div class="hero-badge">Available for freelance work</div>
+            <h1>Hi, I'm Emmanuel Ebinum</h1>
+            <p class="hero-tagline">
+                When I'm not writing or reading books, you'd find me taking editing videos. Here are some of the works
+                I've put
+                out.
+            </p>
+            <div class="hero-actions">
+                <a href="https://x.com/binum_dev" target="_blank" rel="noopener" id="hero-follow-btn"
+                    class="btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.393 6.231H2.752l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                    Follow on X
+                </a>
+                <a href="#video-editing" id="hero-work-btn" class="btn-ghost">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 5v14M5 12l7 7 7-7" />
+                    </svg>
+                    See my work
+                </a>
+            </div>
+        </section>
+
+        <!-- STATS BAR -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">5<span>+</span></div>
+                <div class="stat-label">Video Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5<span>+</span></div>
+                <div class="stat-label">Crypto Threads</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100<span>%</span></div>
+                <div class="stat-label">Passion-Driven</div>
+            </div>
+        </div>
+
+        <!-- VIDEO EDITING SECTION -->
+        <section id="video-editing">
+            <div class="section-header" data-reveal>
+                <span class="section-pill"
+                    style="color:var(--accent2);background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.12);">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="23 7 16 12 23 17 23 7" />
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                    </svg>
+                    Video
+                </span>
+                <h2 class="section-title">Video Editing</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="video-filters" id="video-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="saas">SAAS</button>
+                <button class="filter-btn" data-filter="shortform">Short-form Reels</button>
+                <button class="filter-btn" data-filter="other">Others</button>
+            </div>
+
+            <div class="video-grid">
+
+                <div class="video-card" data-reveal data-category="saas" id="video-card-1">
+                    <div class="video-wrap">
+                        <video preload="metadata" muted playsinline src="video1.mp4"></video>
+                        <div class="play-overlay">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                        <button class="video-close" aria-label="Close video">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-label">SAAS</span>
+                        <h3 class="video-title">Edit #1</h3>
+                        <p class="video-summary">A dynamic montage showcasing storytelling, pacing, and motion design
+                            chops.</p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-reveal data-category="shortform" id="video-card-2">
+                    <div class="video-wrap">
+                        <video preload="metadata" muted playsinline src="video2.mp4"></video>
+                        <div class="play-overlay">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                        <button class="video-close" aria-label="Close video">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-label">Short-form Reels</span>
+                        <h3 class="video-title">Edit #2</h3>
+                        <p class="video-summary">Short-form suitable for Instagram and Facebook reel.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-reveal data-category="shortform" id="video-card-3">
+                    <div class="video-wrap">
+                        <video preload="metadata" muted playsinline src="video3.mp4"></video>
+                        <div class="play-overlay">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                        <button class="video-close" aria-label="Close video">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-label">Short-form Reels</span>
+                        <h3 class="video-title">Edit #3</h3>
+                        <p class="video-summary">Short-form content and transition work built for the scroll-stop
+                            moment.</p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-reveal data-category="saas" id="video-card-4">
+                    <div class="video-wrap">
+                        <video preload="metadata" muted playsinline src="video4.mp4"></video>
+                        <div class="play-overlay">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                        <button class="video-close" aria-label="Close video">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-label">SAAS</span>
+                        <h3 class="video-title">Edit #4</h3>
+                        <p class="video-summary">A SAAS product walkthrough.</p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-reveal data-category="other" id="video-card-5">
+                    <div class="video-wrap">
+                        <video preload="metadata" muted playsinline src="video5.mp4"></video>
+                        <div class="play-overlay">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </div>
+                        <button class="video-close" aria-label="Close video">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 6 6 18M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-label">Others</span>
+                        <h3 class="video-title">Edit #5</h3>
+                        <p class="video-summary">Video Edit .</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- WRITING SECTION -->
+        <section id="writing">
+            <div class="section-header section-header--toggle" id="writing-toggle" data-reveal>
+                <span class="section-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z" />
+                    </svg>
+                    Writing
+                </span>
+                <h2 class="section-title">Crypto Threads</h2>
+                <div class="section-line"></div>
+                <svg class="section-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 9l6 6 6-6" />
+                </svg>
+            </div>
+
+            <div class="articles-collapse" id="articles-collapse">
+                <div class="articles-grid" id="articles-grid">
+
+                    <article class="article-card" data-reveal id="article-stablecoins">
+                        <span class="article-tag">Analysis</span>
+                        <h3 class="article-title">Are stablecoins really stable?</h3>
+                        <p class="article-summary">An exploration into the mechanics, risks, and reality behind pegged
+                            digital assets in the crypto ecosystem.</p>
+                        <a href="https://x.com/i/status/1919290819145543882" target="_blank" rel="noopener"
+                            class="read-btn">
+                            Read Thread on X
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </article>
+
+                    <article class="article-card" data-reveal id="article-bull">
+                        <span class="article-tag">Market Cycles</span>
+                        <h3 class="article-title">The 2025 bull may not happen</h3>
+                        <p class="article-summary">Analyzing market cycles, macroeconomic factors, and the variables
+                            that
+                            could disrupt the anticipated next crypto run.</p>
+                        <a href="https://x.com/i/status/1911096405667569789" target="_blank" rel="noopener"
+                            class="read-btn">
+                            Read Thread on X
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </article>
+
+                    <article class="article-card" data-reveal id="article-tao">
+                        <span class="article-tag">Deep Dive</span>
+                        <h3 class="article-title">Deep dive into the TAO ecosystem</h3>
+                        <p class="article-summary">A comprehensive look into Bittensor (TAO), its architecture, and the
+                            future of decentralized AI networks.</p>
+                        <a href="https://x.com/i/status/1909357557430333575" target="_blank" rel="noopener"
+                            class="read-btn">
+                            Read Thread on X
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </article>
+
+                    <article class="article-card" data-reveal id="article-azza">
+                        <span class="article-tag">Product Review</span>
+                        <h3 class="article-title">Azza: a crypto neo-bank</h3>
+                        <p class="article-summary">Reviewing the features, utility, and disruptive potential of Azza as
+                            an
+                            emerging crypto neo-bank.</p>
+                        <a href="https://x.com/i/status/1905246048030798315" target="_blank" rel="noopener"
+                            class="read-btn">
+                            Read Thread on X
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </article>
+
+                    <article class="article-card" data-reveal id="article-rwa">
+                        <span class="article-tag">RWA</span>
+                        <h3 class="article-title">Real World Assets: Trize</h3>
+                        <p class="article-summary">Examining how real-world assets (RWAs) are being tokenized and
+                            brought
+                            on-chain to bridge traditional and decentralized finance.</p>
+                        <a href="https://x.com/i/status/1902620167445643710" target="_blank" rel="noopener"
+                            class="read-btn">
+                            Read Thread on X
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+    </div><!-- /.container -->
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Crafted with care by <a href="https://x.com/binum_dev" target="_blank" rel="noopener">Emmanuel Ebinum</a>
+            &mdash; Writer &amp; Video Editor</p>
+    </footer>
+
+    <script>
+        // Scroll-reveal
+        const revealEls = document.querySelectorAll('[data-reveal]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('revealed'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        revealEls.forEach(el => observer.observe(el));
+
+        // Collapsible writing section
+        const writingToggle = document.getElementById('writing-toggle');
+        const articlesCollapse = document.getElementById('articles-collapse');
+
+        writingToggle.addEventListener('click', () => {
+            const isOpen = articlesCollapse.classList.toggle('open');
+            writingToggle.classList.toggle('open', isOpen);
+            if (isOpen) {
+                document.querySelectorAll('#articles-grid .article-card').forEach(card => {
+                    card.classList.add('revealed');
+                });
+            }
+        });
+
+        // Video category filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const videoCards = document.querySelectorAll('.video-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                videoCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Click-to-expand video cards (in-place, no full-screen overlay)
+        document.querySelectorAll('.video-card').forEach(card => {
+            const wrap = card.querySelector('.video-wrap');
+            const video = wrap.querySelector('video');
+            const closeBtn = card.querySelector('.video-close');
+
+            wrap.addEventListener('click', () => {
+                if (card.classList.contains('expanded')) return;
+
+                // Collapse any other expanded card first
+                document.querySelectorAll('.video-card.expanded').forEach(other => {
+                    if (other !== card) collapseCard(other);
+                });
+
+                card.classList.add('expanded');
+                video.setAttribute('controls', '');
+                video.muted = false;
+                video.play().catch(() => { });
+            });
+
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                collapseCard(card);
+            });
+        });
+
+        function collapseCard(card) {
+            const video = card.querySelector('video');
+            card.classList.remove('expanded');
+            video.pause();
+            video.currentTime = 0;
+            video.muted = true;
+            video.removeAttribute('controls');
+        }
+
+        // Collapse when clicking outside any expanded card
+        document.addEventListener('click', (e) => {
+            document.querySelectorAll('.video-card.expanded').forEach(card => {
+                if (!card.contains(e.target)) collapseCard(card);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
