@@ -26,6 +26,8 @@
             --text-muted: #555555;
             --text-dim: #999999;
             --accent: #111111;
+            --primary-green: #16A34A;
+            --bright-green: #00E676;
             --accent2: #555555;
             --glow: rgba(0, 0, 0, 0.06);
             --glow2: rgba(0, 0, 0, 0.04);
@@ -143,7 +145,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--accent);
+            color: var(--primary-green);
         }
 
         /* =========================================
@@ -160,11 +162,11 @@
             gap: 0.5rem;
             padding: 0.35rem 1rem;
             border-radius: var(--radius-btn);
-            border: 1px solid var(--border);
-            background: var(--bg-glass);
+            border: 1px solid rgba(22, 163, 74, 0.3);
+            background: rgba(22, 163, 74, 0.08);
             font-size: 0.78rem;
             font-weight: 500;
-            color: var(--accent);
+            color: var(--primary-green);
             letter-spacing: 0.06em;
             text-transform: uppercase;
             margin-bottom: 1.8rem;
@@ -176,8 +178,8 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 8px var(--accent);
+            background: var(--bright-green);
+            box-shadow: 0 0 8px var(--bright-green);
             animation: pulse-dot 2s ease-in-out infinite;
         }
 
@@ -246,27 +248,26 @@
             box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
         }
 
-        .btn-ghost {
+        .btn-green {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             padding: 0.7rem 1.6rem;
             border-radius: var(--radius-btn);
-            border: 1px solid var(--border);
-            background: var(--bg-glass);
-            color: var(--text);
+            background: var(--primary-green);
+            color: #ffffff;
             font-family: var(--font-display);
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             text-decoration: none;
             transition: all var(--transition);
-            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 16px rgba(22, 163, 74, 0.25);
         }
 
-        .btn-ghost:hover {
-            border-color: var(--border-hover);
-            color: var(--accent);
+        .btn-green:hover {
+            background: var(--bright-green);
             transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 230, 118, 0.35);
         }
 
         /* =========================================
@@ -292,12 +293,12 @@
             font-family: var(--font-display);
             font-size: 1.8rem;
             font-weight: 800;
-            color: var(--text);
+            color: var(--primary-green);
             letter-spacing: -0.04em;
         }
 
         .stat-number span {
-            color: var(--accent);
+            color: var(--primary-green);
         }
 
         .stat-label {
@@ -467,7 +468,7 @@
             gap: 0.4rem;
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--accent);
+            color: var(--primary-green);
             text-decoration: none;
             transition: gap var(--transition), opacity var(--transition);
             margin-top: 0.25rem;
@@ -475,7 +476,8 @@
 
         .read-btn:hover {
             gap: 0.7rem;
-            opacity: 0.8;
+            opacity: 1;
+            color: var(--bright-green);
         }
 
         .read-btn svg {
@@ -566,7 +568,7 @@
         .video-wrap {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 4 / 5;
             background: #000;
             overflow: hidden;
             cursor: pointer;
@@ -781,7 +783,7 @@
                 <ul class="nav-links">
                     <li><a href="#video-editing">Video</a></li>
                     <li><a href="#writing">Writing</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#about">About Me</a></li>
                     <li><a href="https://x.com/binum_dev" target="_blank" rel="noopener">X (Twitter)</a></li>
                 </ul>
             </div>
@@ -806,7 +808,7 @@
                     </svg>
                     Follow on X
                 </a>
-                <a href="#video-editing" id="hero-work-btn" class="btn-ghost">
+                <a href="#video-editing" id="hero-work-btn" class="btn-green">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 5v14M5 12l7 7 7-7" />
@@ -1082,7 +1084,11 @@
                     Lagos, Nigeria, with two and a half years of experience behind the timeline.</p>
                 <p style="margin-bottom: 1.5rem;">Before I picked up editing, I interned at a media buying agency, and
                     that experience shaped everything about how I edit today. I don't just cut for looks — I edit with
-                    one thing in mind: <strong>CONVERSION</strong>.</p>
+                    one thing in mind: <strong
+                        style="color: var(--primary-green); text-shadow: 0 0 12px rgba(0,230,118,0.5);">CONVERSION</strong>.
+                </p>
+                <p style="margin-bottom: 1.5rem;"><strong>Tools I use:</strong> Adobe Premiere Pro and After Effects.
+                </p>
                 <p>When I'm not editing, you'll find me buried in a book or getting ready to nap.</p>
             </div>
         </section>
