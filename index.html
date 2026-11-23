@@ -449,16 +449,62 @@
             box-shadow: 0 4px 14px rgba(249, 115, 22, 0.3);
         }
 
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.75rem;
-            align-items: start;
+        .video-group {
+            margin-bottom: 3.5rem;
         }
 
-        /* 16:9 cards (non-shortform) span 2 columns on desktop */
-        .video-card:not([data-category="shortform"]) {
-            grid-column: span 2;
+        .video-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .video-group-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .video-group-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+
+        .video-group-pill {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.2rem 0.65rem;
+            border-radius: var(--radius-pill);
+            background: rgba(15, 23, 42, 0.05);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .video-grid {
+            display: grid;
+            gap: 1.75rem;
+        }
+
+        /* 9:16 Short-form reels: 3 equal portrait columns */
+        .video-grid--reels {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .video-grid--reels .video-wrap {
+            aspect-ratio: 9 / 16;
+        }
+
+        /* 16:9 Landscape / SaaS / Long-form: 2 cinematic wide columns */
+        .video-grid--widescreen {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .video-grid--widescreen .video-wrap {
+            aspect-ratio: 16 / 9;
         }
 
         .video-card.hidden {
@@ -500,14 +546,8 @@
         .video-wrap {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9;
             background: #0F172A;
             overflow: hidden;
-        }
-
-        /* Short-form reels get portrait 9:16 aspect ratio */
-        .video-card[data-category="shortform"] .video-wrap {
-            aspect-ratio: 9 / 16;
         }
 
         .video-wrap iframe {
@@ -826,14 +866,15 @@
                 display: none;
             }
 
-            /* Video grid: 2 columns on tablet */
-            .video-grid {
+            /* Video grid on tablet */
+            .video-grid--reels {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.25rem;
             }
 
-            .video-card:not([data-category="shortform"]) {
-                grid-column: span 2;
+            .video-grid--widescreen {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
             }
 
             .articles-grid {
@@ -911,19 +952,15 @@
                 font-size: 1.3rem;
             }
 
-            /* Video grid: single column on small mobile */
-            .video-grid {
+            /* Video grid on small mobile */
+            .video-grid--reels,
+            .video-grid--widescreen {
                 grid-template-columns: 1fr;
                 gap: 1.25rem;
             }
 
-            .video-card:not([data-category="shortform"]) {
-                grid-column: span 1;
-            }
-
-            /* Cap short-form portrait height on small screens */
-            .video-card[data-category="shortform"] .video-wrap {
-                max-height: 420px;
+            .video-grid--reels .video-wrap {
+                max-height: 440px;
             }
 
             .video-info {
@@ -1065,151 +1102,171 @@
                 </div>
             </div>
 
-            <div class="video-grid">
-
-                <div class="video-card" data-reveal data-category="shortform" id="video-card-1">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/OpVpHETnr_g"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <span class="video-label">Short-form Reels</span>
-                        <h3 class="video-title">Edit #1</h3>
-                        <p class="video-summary">High-impact short-form reel designed for high retention and engagement.</p>
-                    </div>
+            <!-- SHORT-FORM REELS GROUP (9:16) -->
+            <div class="video-group" data-group="shortform">
+                <div class="video-group-header" data-reveal>
+                    <span class="video-group-pill">9:16 Portrait</span>
+                    <h3 class="video-group-title">Short-form Reels</h3>
                 </div>
 
-                <div class="video-card" data-reveal data-category="shortform" id="video-card-2">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/PW7ydc3i4Ro"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                <div class="video-grid video-grid--reels">
+
+                    <div class="video-card" data-reveal data-category="shortform" id="video-card-1">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/OpVpHETnr_g"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Short-form Reels</span>
+                            <h3 class="video-title">Edit #1</h3>
+                            <p class="video-summary">High-impact short-form reel designed for high retention and engagement.</p>
+                        </div>
                     </div>
-                    <div class="video-info">
-                        <span class="video-label">Short-form Reels</span>
-                        <h3 class="video-title">Edit #2</h3>
-                        <p class="video-summary">Dynamic short-form motion edit tailored for audience retention.</p>
+
+                    <div class="video-card" data-reveal data-category="shortform" id="video-card-2">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/PW7ydc3i4Ro"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Short-form Reels</span>
+                            <h3 class="video-title">Edit #2</h3>
+                            <p class="video-summary">Dynamic short-form motion edit tailored for audience retention.</p>
+                        </div>
                     </div>
+
+                    <div class="video-card" data-reveal data-category="shortform" id="video-card-3">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/9qBj65n8Msw"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Short-form Reels</span>
+                            <h3 class="video-title">Edit #3</h3>
+                            <p class="video-summary">Fast-paced short-form creative crafted for the scroll-stopping hook.</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card" data-reveal data-category="shortform" id="video-card-6">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/4EmNPFpgyso"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Short-form Reels</span>
+                            <h3 class="video-title">Edit #6</h3>
+                            <p class="video-summary">Short-form motion edit tailored for high retention on Instagram and TikTok.</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card" data-reveal data-category="shortform" id="video-card-7">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/Z1crpRrMneg"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Short-form Reels</span>
+                            <h3 class="video-title">Edit #7</h3>
+                            <p class="video-summary">Short-form content and seamless transition work designed for the scroll-stopping hook.</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card" data-reveal data-category="shortform" id="video-card-10">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/6wrt5XFD1l0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Short-form Reels</span>
+                            <h3 class="video-title">Edit #10</h3>
+                            <p class="video-summary">Fast-paced short-form creative crafted for audience engagement.</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card" data-reveal data-category="shortform" id="video-card-11">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/Klg27MACaqY"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Short-form Reels</span>
+                            <h3 class="video-title">Edit #11</h3>
+                            <p class="video-summary">High-energy short-form edit engineered for social virality.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- LONG-FORM & CLIENT PROJECTS GROUP (16:9) -->
+            <div class="video-group" data-group="landscape">
+                <div class="video-group-header" data-reveal>
+                    <span class="video-group-pill">16:9 Widescreen</span>
+                    <h3 class="video-group-title">Long-form &amp; Client Projects</h3>
                 </div>
 
-                <div class="video-card" data-reveal data-category="shortform" id="video-card-3">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/9qBj65n8Msw"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <span class="video-label">Short-form Reels</span>
-                        <h3 class="video-title">Edit #3</h3>
-                        <p class="video-summary">Fast-paced short-form creative crafted for the scroll-stopping hook.</p>
-                    </div>
-                </div>
+                <div class="video-grid video-grid--widescreen">
 
-                <div class="video-card" data-reveal data-category="longform" id="video-card-4">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/dUVJfMg8q94"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <div class="video-card" data-reveal data-category="longform" id="video-card-4">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/dUVJfMg8q94"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Long-form Videos</span>
+                            <h3 class="video-title">Edit #4</h3>
+                            <p class="video-summary">Full narrative long-form YouTube edit with compelling structure and storytelling.</p>
+                        </div>
                     </div>
-                    <div class="video-info">
-                        <span class="video-label">Long-form Videos</span>
-                        <h3 class="video-title">Edit #4</h3>
-                        <p class="video-summary">Full narrative long-form YouTube edit with compelling structure and storytelling.</p>
-                    </div>
-                </div>
 
-                <div class="video-card" data-reveal data-category="saas" id="video-card-5">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/A_GaIxjgpTE"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <div class="video-card" data-reveal data-category="saas" id="video-card-5">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/A_GaIxjgpTE"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">SaaS</span>
+                            <h3 class="video-title">Edit #5</h3>
+                            <p class="video-summary">A dynamic montage showcasing storytelling, pacing, and motion design chops.</p>
+                        </div>
                     </div>
-                    <div class="video-info">
-                        <span class="video-label">SaaS</span>
-                        <h3 class="video-title">Edit #5</h3>
-                        <p class="video-summary">A dynamic montage showcasing storytelling, pacing, and motion design chops.</p>
-                    </div>
-                </div>
 
-                <div class="video-card" data-reveal data-category="shortform" id="video-card-6">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/4EmNPFpgyso"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <div class="video-card" data-reveal data-category="saas" id="video-card-8">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/EPqo_P56A2g"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">SaaS</span>
+                            <h3 class="video-title">Edit #8</h3>
+                            <p class="video-summary">A sleek SaaS product walkthrough highlighting product UI with crisp pacing.</p>
+                        </div>
                     </div>
-                    <div class="video-info">
-                        <span class="video-label">Short-form Reels</span>
-                        <h3 class="video-title">Edit #6</h3>
-                        <p class="video-summary">Short-form motion edit tailored for high retention on Instagram and TikTok.</p>
-                    </div>
-                </div>
 
-                <div class="video-card" data-reveal data-category="shortform" id="video-card-7">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/Z1crpRrMneg"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <div class="video-card" data-reveal data-category="other" id="video-card-9">
+                        <div class="video-wrap">
+                            <iframe src="https://www.youtube.com/embed/eAp3zZ_PM9I"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <span class="video-label">Others</span>
+                            <h3 class="video-title">Edit #9</h3>
+                            <p class="video-summary">Engaging commercial video edit with polished color grading and sound design.</p>
+                        </div>
                     </div>
-                    <div class="video-info">
-                        <span class="video-label">Short-form Reels</span>
-                        <h3 class="video-title">Edit #7</h3>
-                        <p class="video-summary">Short-form content and seamless transition work designed for the scroll-stopping hook.</p>
-                    </div>
-                </div>
 
-                <div class="video-card" data-reveal data-category="saas" id="video-card-8">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/EPqo_P56A2g"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <span class="video-label">SaaS</span>
-                        <h3 class="video-title">Edit #8</h3>
-                        <p class="video-summary">A sleek SaaS product walkthrough highlighting product UI with crisp pacing.</p>
-                    </div>
                 </div>
-
-                <div class="video-card" data-reveal data-category="other" id="video-card-9">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/eAp3zZ_PM9I"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <span class="video-label">Others</span>
-                        <h3 class="video-title">Edit #9</h3>
-                        <p class="video-summary">Engaging commercial video edit with polished color grading and sound design.</p>
-                    </div>
-                </div>
-
-                <div class="video-card" data-reveal data-category="shortform" id="video-card-10">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/6wrt5XFD1l0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <span class="video-label">Short-form Reels</span>
-                        <h3 class="video-title">Edit #10</h3>
-                        <p class="video-summary">Fast-paced short-form creative crafted for audience engagement.</p>
-                    </div>
-                </div>
-
-                <div class="video-card" data-reveal data-category="shortform" id="video-card-11">
-                    <div class="video-wrap">
-                        <iframe src="https://www.youtube.com/embed/Klg27MACaqY"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <span class="video-label">Short-form Reels</span>
-                        <h3 class="video-title">Edit #11</h3>
-                        <p class="video-summary">High-energy short-form edit engineered for social virality.</p>
-                    </div>
-                </div>
-
             </div>
         </section>
 
@@ -1355,6 +1412,7 @@
         // Video category filtering
         const filterBtns = document.querySelectorAll('.filter-btn');
         const videoCards = document.querySelectorAll('.video-card');
+        const videoGroups = document.querySelectorAll('.video-group');
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1368,6 +1426,12 @@
                     } else {
                         card.classList.add('hidden');
                     }
+                });
+
+                // Show/hide entire groups based on visible items
+                videoGroups.forEach(group => {
+                    const visibleCards = group.querySelectorAll('.video-card:not(.hidden)');
+                    group.style.display = visibleCards.length > 0 ? 'block' : 'none';
                 });
             });
         });
